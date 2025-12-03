@@ -1,0 +1,30 @@
+.menu-reg-box {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 10vh;
+  margin: 0;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.button-menu-reg {
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: #0b2277;
+  color: white;
+}
+
+.button-menu-reg:hover {
+  background-color: #007bff;
+  color: #ffffff;
+  border-color: #646cff;
+}

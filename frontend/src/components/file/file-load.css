@@ -1,0 +1,80 @@
+.modal-box-form-load {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-form-load {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.form-container {
+  background-color: rgb(87, 103, 224);
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  text-align: center;
+}
+
+.form-title {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+.upload-field {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.comment-field {
+  display: block;
+  padding: .5em;
+  margin-bottom: 1em;
+}
+
+.open-button,
+.button-load-form-submit,
+.button-load-form-cancel {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.open-button,
+.button-load-form-submit {
+  background-color: #007bff;
+  color: white;
+}
+.open-button,
+.button-load-form-submit:hover {
+  background-color: #0056b3;
+}
+
+.button-load-form-cancel {
+  background-color: #ff6347;
+  color: white;
+}
+
+.button-load-form-cancel:hover {
+  background-color: red;
+}
+
+.errors {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}
