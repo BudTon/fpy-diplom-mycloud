@@ -14,7 +14,6 @@ from user.views.file_views import FileViewSet, StorageViewPatch, download_file_l
 from user.views.user_views import UserViewSet, UserAdmin
 from user.views.storage_views import StorageView
 from user.views.home_views import HomeView
-# , DownloadFileView
 
 
 router = DefaultRouter()
@@ -33,11 +32,6 @@ urlpatterns = [
         StorageViewPatch.as_view(),
         name="storage_detail_patch",
     ),
-    # path(
-    #     "download/file/<int:file_id>/",
-    #     DownloadFileView.as_view(),
-    #     name="download_file",
-    # ),
     path("user/<int:user_id>/", UserAdmin.as_view(), name="user_list"),
     path(
         "download/file/<uuid:short_hash>/<str:action>",

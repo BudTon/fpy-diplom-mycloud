@@ -24,12 +24,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = "__all__"
-        # fields = ["id", "username", "email"]
 
 
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
         model = File
         fields = "__all__"
-        # fields = []
-        # read_only_fields = ["created_at"]

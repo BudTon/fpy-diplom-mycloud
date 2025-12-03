@@ -29,8 +29,6 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False)
 
-# ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
-
 ALLOWED_HOSTS = ["*"]
 PORT = int(os.environ.get("PORT", "8000"))
 
@@ -51,14 +49,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",  # Нужно для CORS-поддержки
-    # Ваши приложения
+
     "user",
     "rest_framework",
     "rest_framework.authtoken",  # Включаем support для токенов
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware", # Обязательно размещайте CorsMiddleware выше остальных middleware
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -147,10 +145,6 @@ STATIC_URL = "static/"
 MEDIA_URL = (os.getenv("MEDIA_URL"))
 MEDIA_ROOT = BASE_DIR / f"{(os.getenv("MEDIA_ROOT"))}"
 
-# LOGIN_URL = "http://localhost:5173/storage"
-# LOGIN_REDIRECT_URL = "/"
-# LOGOUT_REDIRECT_URL = "/"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -158,8 +152,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # AUTHENTICATION SETTINGS
 
 AUTH_USER_MODEL = "auth.User"  # Стандартная модель пользователя Django
-
-# CORS SETTINGS (Настройки для Cross-Origin Resource Sharing)
 
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
 
