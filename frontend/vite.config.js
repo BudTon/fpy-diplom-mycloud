@@ -10,4 +10,13 @@ export default defineConfig({
     jsxFragment: 'React.Fragment',
     include: /\.[jt]sx?$/,
   },
+  // server: {
+  //   proxy: {
+  //     '/api': {
+  //       target: 'http://95.163.232.154/', // замените на нужный URL
+  //       changeOrigin: true,
+  //       rewrite: path => path.replace(/^\/api/, '')
+  //     }
+  //   }
+  // }
 })

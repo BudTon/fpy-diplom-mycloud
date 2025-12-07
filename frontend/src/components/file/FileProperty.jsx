@@ -85,12 +85,16 @@ export default function FileProperty({ file, index }) {
   };
 
   const copyToClipboard = (fileUrl) => {
-    navigator.clipboard.writeText(fileUrl).then(() => {
-      showToast('toast', "Ссылка скопирована!")
-      console.log('Ссылка скопирована!');
-    }).catch((err) => {
-      console.error('Ошибка при копировании:', err);
-    });
+    const textArea = document.createElement("textarea");
+    textArea.value = fileUrl;
+    textArea.style.position = 'absolute';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    showToast('toast', "Ссылка скопирована!");
+    console.log('Ссылка скопирована!');
   };
 
   const openFileInBrowser = (fileUrl) => {
@@ -125,7 +129,7 @@ export default function FileProperty({ file, index }) {
                 <div className="link-btn">
                   <h2>Ссылка на файл:</h2>
                   <button className="copy-button-link" onClick={() => copyToClipboard(links.download)}>{links ? `Копировать 🔗` : "-"}</button>
-                  <button className="open-button-link" onClick={() => openFileInBrowser(links.view)}>{links ? `Открать файл  📄 ` : "-"}</button>
+                  <button className="open-button-link" onClick={() => openFileInBrowser(links.view)}>{links ? `Открыть файл  📄 ` : "-"}</button>
                   <p> {links ? links.view : "-"}</p>
                 </div>
                 <div className="btn-all">

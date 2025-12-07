@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
 PORT = int(os.environ.get("PORT", "8000"))
 
 if PORT != 8000:
@@ -56,9 +56,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -127,15 +127,10 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = os.getenv("TIME_ZONE")
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 FILE_CHARSET = "UTF-8"
-
 DEFAULT_CHARSET = "UTF-8"
 
 # Static files (CSS, JavaScript, Images)
@@ -153,9 +148,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "auth.User"  # Стандартная модель пользователя Django
 
-CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
-
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
 
 SESSION_SAVE_EVERY_REQUEST = True  # Сохранять сессию при каждом запросе
 SESSION_CACHE_ALIAS = "default"  # Использовать кэширование для сессий
@@ -167,13 +159,17 @@ SESSION_COOKIE_SECURE = False  # Cookie будет передаваться по
 SESSION_COOKIE_HTTPONLY = True  # Доступ к cookie только через HTTP
 SESSION_COOKIE_SAMESITE = "Strict"  # Ограничивает cookie для того же сайта
 
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+CORS_EXPOSE_HEADERS = ['*']
+CORS_ALLOW_CREDENTIALS = True  # Позволяет использовать куки и сессии
 
 CORS_ALLOW_METHODS = [
-    "DELETE",
     "GET",
+    "POST",
     "OPTIONS",
     "PATCH",
-    "POST",
+    "DELETE",
     "PUT",
 ]
 
@@ -188,10 +184,6 @@ CORS_ALLOW_HEADERS = [
     "x-csrftoken",
     "x-requested-with",
 ]
-
-CORS_EXPOSE_HEADERS = ['*']
-
-CORS_ALLOW_CREDENTIALS = True  # Позволяет использовать куки и сессии
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -208,10 +200,4 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",  # Только JSON-ответы
     ],
-}
-
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
-    }
 }
