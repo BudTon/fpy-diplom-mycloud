@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
-import { hiddenStoragePage, hiddenUserAdminPage } from '../../redux/slices/menuSlice';
+import { notHiddenStoragePage, notHiddenUserAdminPage, hiddenStoragePage, hiddenUserAdminPage } from '../../redux/slices/menuSlice';
 import { invisibleRegistrationForm } from '../../redux/slices/formSlice';
 import { logout } from "../../redux/slices/menuRegSlice";
 import './register-form.css'
 
-export default function RegistrationForm () {
+export default function RegistrationForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, errorMessage } = useSelector((state) => state.user);
@@ -36,6 +36,7 @@ export default function RegistrationForm () {
     };
   };
 
+
   const validationSchema = Yup.object().shape({
     username: Yup.string()
       .matches(/^[a-zA-Z][a-zA-Z0-9]{3,19}$/, 'Логин должен начинаться с буквы и содержать только латиницу и цифры.')
@@ -59,11 +60,15 @@ export default function RegistrationForm () {
             <Formik
               initialValues={{ username: "", firstname: "", email: "", password: "", isStaff: false }}
               validationSchema={validationSchema}
-              onSubmit={async(values) => {
+              onSubmit={async (values) => {
                 values.isStaff = isCheckedAdmin;
                 await dispatch(fetchRegisterUser(values))
                   .unwrap()
                   .then((message) => {
+                    dispatch(notHiddenStoragePage());
+                    if (isCheckedAdmin) {
+                      dispatch(notHiddenUserAdminPage())
+                    }
                     alert(message.message);
                     dispatch(invisibleRegistrationForm());
                     dispatch(fetchLoginUser({ username: values.username, password: values.password })).unwrap();
@@ -78,6 +83,7 @@ export default function RegistrationForm () {
                     } else {
                       alert('Произошла неизвестная ошибка.');
                     }
+
                   });
               }}
             >

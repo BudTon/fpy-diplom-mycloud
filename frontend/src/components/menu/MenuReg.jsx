@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { login, logout } from '../../redux/slices/menuRegSlice';
 import { visibleLoginForm, visibleRegistrationForm } from '../../redux/slices/formSlice';
-import { hiddenStoragePage, notHiddenStoragePage, hiddenUserAdminPage, notHiddenUserAdminPage } from '../../redux/slices/menuSlice';
+import { hiddenStoragePage, hiddenUserAdminPage } from '../../redux/slices/menuSlice';
 import { useNavigate } from 'react-router-dom';
 import './menu-reg.css';
 
@@ -13,14 +13,11 @@ export default function MenuReg() {
   const handleRegistration = () => {
     dispatch(login());
     dispatch(visibleRegistrationForm());
-    dispatch(notHiddenStoragePage());
   };
 
   const handleLogin = () => {
     dispatch(login());
     dispatch(visibleLoginForm());
-    dispatch(notHiddenUserAdminPage());
-
   };
 
   const handleLogout = () => {

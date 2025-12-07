@@ -4,7 +4,7 @@ import { fetchFileUser } from '../../fetch/fetchFileUser'
 import { useEffect } from 'react';
 import { Formik, Field, Form } from "formik";
 import { useNavigate } from 'react-router-dom';
-import { hiddenStoragePage, notHiddenStoragePage, hiddenUserAdminPage } from '../../redux/slices/menuSlice';
+import { hiddenStoragePage, notHiddenStoragePage, hiddenUserAdminPage, notHiddenUserAdminPage } from '../../redux/slices/menuSlice';
 import { invisibleLoginForm } from '../../redux/slices/formSlice';
 import { logout } from "../../redux/slices/menuRegSlice";
 import './login-form.css';
@@ -19,7 +19,12 @@ export default function LoginForm() {
     dispatch(fetchFileUser(results));
   }, [dispatch, results]);
 
+  console.log(results, ' - useSelector((state) => state.user);' );
 
+  if (results.isStaff) {
+    dispatch(notHiddenUserAdminPage());
+  }
+  
   if (results.status !== 'ok') {
     console.warn('Пользователь еще неавторизирован');
   };
