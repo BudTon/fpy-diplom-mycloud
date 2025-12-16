@@ -38,11 +38,27 @@
   cp .env.example .env
 ```
 9. Создаём базу данных с учётом настроек указанных в файле `.env`:
-```bash
+<!-- ```bash
   createdb -U <USER_PSQL> <NAME_PSQL>
 ```
 ```
   Пароль: <PASSWORD_PSQL>
+``` -->
+*  для Windows
+```bash
+(Get-Content .env) -notmatch '^#' |
+    Where-Object {$_ -ne ""} |
+    ForEach-Object {
+        $parts = $_.Trim().Split('=', 2);
+        if($parts.Count -eq 2){
+            Set-Item -Path "Env:$($parts[0].Trim())" -Value $($parts[1].Trim())
+        }
+    };
+& {createdb -h localhost -p 5432 -U "$env:USER_PSQL" "$env:NAME_PSQL"}
+```
+*  для Linux/MacOS
+```bash
+export $(grep -v '^#' .env | xargs); createdb -h localhost -p 5432 -U "$POSTGRES_USER" "$POSTGRES_DB"
 ```
 
 ***ВНИМАНИЕ!!!*** Убедитесь, что сервер PostgreSQL запущен.

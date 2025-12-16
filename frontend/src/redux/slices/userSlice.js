@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchLoginUser } from '../../fetch/fetchLoginUser';
+import { fetchUserLogin } from '../../fetch/fetchUserLogin';
 
 const initialState = {
   value: '',
@@ -14,26 +14,26 @@ const userSlice = createSlice({
   name: "login",
   initialState,
   reducers: {
-      clear: (state) => {
-        state.value = '';
-        state.results = '';
-        state.error = null;
-      },
+    clear: (state) => {
+      state.value = '';
+      state.results = '';
+      state.error = null;
     },
-    extraReducers(builder) {
-      builder.addCase(fetchLoginUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      });
-      builder.addCase(fetchLoginUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.results = action.payload || [];
-      });
-      builder.addCase(fetchLoginUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
-    },
+  },
+  extraReducers(builder) {
+    builder.addCase(fetchUserLogin.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(fetchUserLogin.fulfilled, (state, action) => {
+      state.loading = false;
+      state.results = action.payload || [];
+    });
+    builder.addCase(fetchUserLogin.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+  },
 });
 
 export const { clear } = userSlice.actions;

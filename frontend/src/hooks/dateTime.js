@@ -1,6 +1,6 @@
 export function dateTime(date) {
   try {
-    const regex = /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})\.\d+\w$/;
+    const regex = /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2})/;
     const result = date.match(regex);
 
     if (!result) {

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLoginUser } from '../../fetch/fetchLoginUser'
+import { fetchUserLogin } from '../../fetch/fetchUserLogin'
 import { fetchFileUser } from '../../fetch/fetchFileUser'
 import { useEffect } from 'react';
 import { Formik, Field, Form } from "formik";
@@ -19,15 +19,17 @@ export default function LoginForm() {
     dispatch(fetchFileUser(results));
   }, [dispatch, results]);
 
-  console.log(results, ' - useSelector((state) => state.user);' );
+  useEffect(() => {
+    if (results.isStaff) {
+      dispatch(notHiddenUserAdminPage());
+    }
+  }, [dispatch, results]);
 
-  if (results.isStaff) {
-    dispatch(notHiddenUserAdminPage());
-  }
-  
-  if (results.status !== 'ok') {
-    console.warn('Пользователь еще неавторизирован');
-  };
+  useEffect(() => {
+    if (results.status !== 'ok') {
+      console.warn('Пользователь еще неавторизирован');
+    }
+  }, [results]);
 
   const handleCancel = () => {
     dispatch(invisibleLoginForm());
@@ -48,7 +50,7 @@ export default function LoginForm() {
               validate={(values) => {
               }}
               onSubmit={async (values) => {
-                await dispatch(fetchLoginUser(values))
+                await dispatch(fetchUserLogin(values))
                   .unwrap()
                   .then(() => {
                     dispatch(invisibleLoginForm());

@@ -12,7 +12,11 @@ export const fetchFileDelete = createAsyncThunk(
 
       if (userId !== undefined) {
         deleteUrl += `?file_id=${encodeURIComponent(fileId)}&user_id=${encodeURIComponent(userId)}`;
+      } else {
+        return alert('Удалить файл НЕВОЗМОЖНО!\nОтсутствует ID пользователя')
       }
+      console.log(deleteUrl, ' - deleteUrl');
+
 
       const response = await fetch(deleteUrl, {
         method: 'DELETE',

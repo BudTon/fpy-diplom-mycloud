@@ -37,7 +37,7 @@ def download_file_link(request, short_hash, action):
     return response
 
 
-class StorageViewPatch(APIView):
+class FileRenameView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -49,8 +49,25 @@ class StorageViewPatch(APIView):
                 {"detail": "Файл не найден"}, status=status.HTTP_404_NOT_FOUND
             )
         new_file_name = request.data.get("newFileName", file.file_name)
-        new_comment = request.data.get("newComment", file.comment)
         file.file_name = new_file_name
+        file.save()
+        return Response(
+            {"detail": "Метаданные файла успешно обновлены"}, status=status.HTTP_200_OK
+        )
+
+
+class FileChangeCommentView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request, file_id):
+        try:
+            file = File.objects.get(pk=file_id)
+        except File.DoesNotExist:
+            return Response(
+                {"detail": "Файл не найден"}, status=status.HTTP_404_NOT_FOUND
+            )
+        new_comment = request.data.get("newComment", file.comment)
         file.comment = new_comment
         file.save()
         return Response(

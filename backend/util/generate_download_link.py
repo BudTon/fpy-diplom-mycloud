@@ -1,6 +1,5 @@
 from django.urls import reverse
 
-
 def generate_download_link(request, uploaded_file):
     internal_url_view = reverse(
         "download_file_link", args=[uploaded_file.short_hash, "view"]

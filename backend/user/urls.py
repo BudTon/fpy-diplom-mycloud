@@ -9,34 +9,51 @@ from django.urls import (
     include,
 )
 
-from user.views.auth_views import user_login, RegistrationView
-from user.views.file_views import FileViewSet, StorageViewPatch, download_file_link
-from user.views.user_views import UserViewSet, UserAdmin
+from user.views.auth_views import (
+    user_login,
+    RegistrationView,
+    RegistrationUserValidateView,
+)
+from user.views.file_views import (
+    FileViewSet,
+    download_file_link,
+    FileRenameView,
+    FileChangeCommentView,
+)
+from user.views.user_views import UserAdmin, ListUserView
 from user.views.storage_views import StorageView
 from user.views.home_views import HomeView
 
 
 router = DefaultRouter()
-router.register("users", UserViewSet)
 router.register("files", FileViewSet)
 
 
 urlpatterns = [
-    path("login/", user_login, name="login"),  # Ручная регистрация маршрута
+    path("login/", user_login, name="login"),
     path("home/", HomeView.as_view(), name="home"),
     path("register/", RegistrationView.as_view(), name="register"),
-    path("storage/", StorageView.as_view(), name="storage"),
-    path("storage/<int:pk>", StorageView.as_view(), name="storage_detail"),
     path(
-        "storage/patch/<int:file_id>/",
-        StorageViewPatch.as_view(),
-        name="storage_detail_patch",
+        "register/authadmin/", RegistrationUserValidateView.as_view(), name="authadmin"
     ),
+    path("storage/", StorageView.as_view(), name="storage"),
+    path("users/", ListUserView.as_view(), name="users"),
+    path("storage/<int:pk>", StorageView.as_view(), name="storage_detail"),
     path("user/<int:user_id>/", UserAdmin.as_view(), name="user_list"),
     path(
         "download/file/<uuid:short_hash>/<str:action>",
         download_file_link,
         name="download_file_link",
+    ),
+    path(
+        "file/rename/<int:file_id>/",
+        FileRenameView.as_view(),
+        name="update-filename",
+    ),
+    path(
+        "file/comment/<int:file_id>/",
+        FileChangeCommentView.as_view(),
+        name="update-comment",
     ),
     path("", include(router.urls)),
 ]

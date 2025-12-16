@@ -4,7 +4,7 @@ export const fetchFileRename = createAsyncThunk(
   'storage/renameFile',
   async ({ fileId, newFileName, newComment, token }, { rejectWithValue }) => {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
-    const fetchUrl = `${BASE_URL}storage/patch/${fileId}/`
+    const fetchUrl = `${BASE_URL}file/rename/${fileId}/`
     if (!token) {
       return rejectWithValue('No valid token provided!');
     }
@@ -15,6 +15,7 @@ export const fetchFileRename = createAsyncThunk(
     if (newComment) {
       data = { newComment }
     }
+
     try {
       const response = await fetch(fetchUrl, {
         method: 'PATCH',
@@ -23,7 +24,6 @@ export const fetchFileRename = createAsyncThunk(
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Methods': '*',
           'Authorization': `Token ${token}`,
         },
         body: JSON.stringify(data),

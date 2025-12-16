@@ -18,7 +18,6 @@ __pycache__/
 Thumbs.db
 *.env
 .env.*
-!.env.example
 *.local
 
 # Директории и файлы Python/Django
@@ -50,7 +49,7 @@ cover/
 *.pyd
 *.sqlite3
 db.sqlite3
-migrations/
+# migrations/
 media/
 staticfiles/
 *.backup

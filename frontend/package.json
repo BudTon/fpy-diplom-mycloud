@@ -2,7 +2,6 @@
   "name": "cloud",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://github.com/BudTon/diplom_cloud_frontend",
   "type": "module",
   "scripts": {
     "dev": "vite",

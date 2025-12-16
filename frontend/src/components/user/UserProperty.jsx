@@ -4,17 +4,20 @@ import { fetchUserStatusAdmin } from '../../fetch/fetchUserStatusAdmin';
 import { fetchUserDelete } from '../../fetch/fetchUserDelete';
 import { fetchFileUser } from '../../fetch/fetchFileUser';
 import { useNavigate } from 'react-router-dom';
+import { fetchUsers } from '../../fetch/fetchUsers';
+
 import './user-property.css';
 
 
-export default function UserProperty({ user, index }) {
+export default function UserProperty({ user, currentPage, index }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const file = useSelector((state) => state.file.results);
   const { id, username, first_name, email, file_count, total_size, is_staff } = user;
   const token = useSelector((state) => state.user.results).token;
   const yourUser = useSelector((state) => state.user.results).userId;
   const [isChecked, setIsChecked] = useState(is_staff);
-  const results = useSelector((state) => state.user.results);
+  // const results = useSelector((state) => state.user.results);
 
   let userCss = '';
   if (yourUser === id) {
@@ -42,7 +45,9 @@ export default function UserProperty({ user, index }) {
           if (response.status === 204) {
             alert(`Пользователь login: ${username} УДАЛЕН!`);
             console.log(`Пользователь login: ${username} УДАЛЕН!`);
-            dispatch(fetchFileUser(results));
+            dispatch(fetchUsers({ userId: id, page: currentPage }));
+
+            // dispatch(fetchFileUser(results));
             navigate('/useradmin');
           } else {
             alert("Ошибка при удалении пользователя.");

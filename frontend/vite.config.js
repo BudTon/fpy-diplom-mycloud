@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "https://github.com/BudTon/diplom_cloud_frontend",
+  // base: "http://127.0.0.1:8000/",
   esbuild: {
     jsxFactory: 'React.createElement',
     jsxFragment: 'React.Fragment',
@@ -12,10 +12,12 @@ export default defineConfig({
   },
   // server: {
   //   proxy: {
-  //     '/api': {
-  //       target: 'http://95.163.232.154/', // замените на нужный URL
+  //     '^(?!(.*\.html)|(.js))$': {
+  //       target: 'http://127.0.0.1:8000',
   //       changeOrigin: true,
-  //       rewrite: path => path.replace(/^\/api/, '')
+  //       secure: false,
+  //       ws: true, // Поддержка WebSocket, если необходимо
+  //       rewrite: path => path
   //     }
   //   }
   // }

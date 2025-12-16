@@ -1,8 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { notHiddenUserAdminPage } from '../redux/slices/menuSlice';
 
-export const fetchLoginUser = createAsyncThunk(
+export const fetchUserLogin = createAsyncThunk(
   'login',
   async ({ username, password }, {rejectWithValue}) => {
     const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -14,7 +12,6 @@ export const fetchLoginUser = createAsyncThunk(
         credentials: 'include',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          // 'X-CSRFToken': csrfToken, // Здесь передаётся токен
         },
         body: JSON.stringify({ username, password })
       });

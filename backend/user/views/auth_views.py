@@ -1,7 +1,8 @@
+import os
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
+from user.models import UserCloud
 from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -35,6 +36,27 @@ def user_login(request):
         )
 
 
+class RegistrationUserValidateView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def post(self, request):
+        auth_admin_frontend = request.data.get("auth_admin")
+        auth_admin_server = os.getenv("SUPERUSER_PASSWORD")
+
+        if auth_admin_frontend == auth_admin_server:
+            return JsonResponse(
+                {
+                    "validate": "True",
+                }
+            )
+        return JsonResponse(
+            {
+                "validate": "False",
+            }
+        )
+
+
 class RegistrationView(APIView):
     authentication_classes = []
     permission_classes = []
@@ -60,26 +82,26 @@ class RegistrationView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        if User.objects.filter(username=username).exists():
+        if UserCloud.objects.filter(username=username).exists():
             return Response(
                 {
-                    'error_code': 'USERNAME_ALREADY_EXISTS',
-                    'detail': 'Такое имя пользователя уже занято.'
+                    "error_code": "USERNAME_ALREADY_EXISTS",
+                    "detail": "Такое имя пользователя уже занято.",
                 },
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
-        if User.objects.filter(email=email).exists():
+        if UserCloud.objects.filter(email=email).exists():
             return Response(
                 {
-                    'error_code': 'EMAIL_ALREADY_EXISTS',
-                    'detail': 'Такой email уже занят.'
+                    "error_code": "EMAIL_ALREADY_EXISTS",
+                    "detail": "Такой email уже занят.",
                 },
-                status=status.HTTP_400_BAD_REQUEST
+                status=status.HTTP_400_BAD_REQUEST,
             )
 
         try:
-            user = User.objects.create_user(
+            user = UserCloud.objects.create_user(
                 username=username,
                 first_name=first_name,
                 email=email,
@@ -88,7 +110,7 @@ class RegistrationView(APIView):
             )
             return Response(
                 {"message": f"Пользователь {user.username} успешно зарегистрирован"},
-                status=status.HTTP_201_CREATED
+                status=status.HTTP_201_CREATED,
             )
         except Exception as error:
             return Response({"error": str(error)}, status=status.HTTP_400_BAD_REQUEST)

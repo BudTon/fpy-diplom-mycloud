@@ -1,6 +1,5 @@
 from user.serializers import UserSerializer
-from user.models import File
-from django.contrib.auth.models import User
+from user.models import File, UserCloud
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -10,7 +9,7 @@ class HomeView(APIView):
     permission_classes = []  # noqa: F811
 
     def get(self, request):
-        users = User.objects.all()
+        users = UserCloud.objects.all()
         users_total = UserSerializer(users, many=True).data
         user_total_count = len(users_total)
         files_total = File.objects.all()

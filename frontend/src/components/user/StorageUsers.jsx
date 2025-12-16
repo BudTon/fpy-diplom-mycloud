@@ -1,10 +1,27 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 import UserProperty from './UserProperty';
+import { useEffect } from 'react';
+import { fetchUsers } from '../../fetch/fetchUsers';
+import Pagination from '../pagination/Pagination';
+
 
 export const StorageUsers = () => {
   const file = useSelector((state) => state.file.results);
-  const loading = useSelector((state) => state.file.loading);
-  const error = useSelector((state) => state.file.error);
+  const loading = useSelector((state) => state.users.loading);
+  const error = useSelector((state) => state.users.error);
+  const { users } = useSelector((state) => state.users.results);
+  const totalPages = useSelector((state) => state.users.results.total_pages);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = +import.meta.env.VITE_ITEMS_PER_PAGE;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers({ userId: file.userId, page: currentPage }));
+  }, [dispatch, currentPage, file.userId]);
+
+
 
   return (
     <>
@@ -21,7 +38,7 @@ export const StorageUsers = () => {
               <th>логин</th>
               <th>полное имя</th>
               <th>email</th>
-              <th>количество файов</th>
+              <th>количество файлов</th>
               <th>размер файлов</th>
               <th>статус админа</th>
               <th>Действие</th>
@@ -29,15 +46,25 @@ export const StorageUsers = () => {
           </thead>
           <tbody>
             {
-              file.users !== undefined &&
-              file.users.length > 0 &&
-              file.users.map((user, index) => (
-                <UserProperty key={user.id} user={user} index={index + 1} />
+              users !== undefined &&
+              users.length > 0 &&
+              users.map((user, index) => (
+                <UserProperty
+                  key={user.id}
+                  user={user}
+                  currentPage={currentPage}
+                  index={(currentPage - 1) * itemsPerPage + index + 1}
+                />
               ))
             }
           </tbody>
         </table>
       )}
+      <Pagination
+        totalPages={totalPages || 1}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
     </>
   );
 };

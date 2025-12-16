@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchFileUser = createAsyncThunk(
   'storage',
   async (results, { rejectWithValue, getState }) => {
-    const { userId } = results
+    const { userId, page } = results
     const { token } = getState().user.results;
     const BASE_URL = import.meta.env.VITE_BASE_URL;
     let fetchUrl = `${BASE_URL}storage/`
@@ -16,6 +16,10 @@ export const fetchFileUser = createAsyncThunk(
       if (userId !== undefined) {
         fetchUrl += `?user_id=${encodeURIComponent(userId)}`;
       }
+      if (page !== undefined) {
+        fetchUrl += `${userId ? '&' : '?'}page=${page}`;
+      }
+
       const response = await fetch(fetchUrl, {
         method: 'GET',
         credentials: 'include',

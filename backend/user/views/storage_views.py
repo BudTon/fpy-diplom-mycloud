@@ -1,20 +1,25 @@
 from django.http import JsonResponse
 from util.generate_download_link import generate_download_link
-from user.serializers import UserSerializer
-from user.models import File
-from django.contrib.auth.models import User
+from user.serializers import FileSerializer
+from user.models import File, UserCloud
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.pagination import PageNumberPagination
 from django.core.files.storage import default_storage
 
 
 class StorageView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    pagination_class = PageNumberPagination
+
+    def get_paginator(self):
+        return self.pagination_class()
 
     def get(self, request):
+        paginator = self.get_paginator()
         user_id = request.query_params.get("user_id", None)
 
         if request.user.is_authenticated:
@@ -22,8 +27,8 @@ class StorageView(APIView):
 
             if user_id is not None:
                 try:
-                    target_user = User.objects.get(id=user_id)
-                except User.DoesNotExist:
+                    target_user = UserCloud.objects.get(id=user_id)
+                except UserCloud.DoesNotExist:
                     return Response(
                         {
                             "status": "error",
@@ -34,20 +39,10 @@ class StorageView(APIView):
             else:
                 target_user = request.user
 
-            if target_user is not None:
-                user_files = list(File.objects.filter(user=target_user).values())
-            else:
-                user_files = []
-
-            if request.user.is_staff:
-                users = User.objects.all()
-                user_serializer = UserSerializer(users, many=True).data
-                for user_data in user_serializer:
-                    files = File.objects.filter(user=user_data["id"])
-                    user_data["total_size"] = sum(file.file.size for file in files)
-                    user_data["file_count"] = len(files)
-            else:
-                user_serializer = []
+            user_files = File.objects.filter(user=target_user).select_related("user")
+            serializer = FileSerializer(user_files, many=True)
+            page = paginator.paginate_queryset(serializer.data, request)
+            total_pages = paginator.page.paginator.num_pages
 
             return Response(
                 {
@@ -55,8 +50,8 @@ class StorageView(APIView):
                     "message": "Successfully retrieved storage information.",
                     "user_name": str(target_user),
                     "userId": target_user.id,
-                    "user_files": user_files,
-                    "users": user_serializer,
+                    "total_pages": total_pages,
+                    "user_files": page,
                 }
             )
 
@@ -66,15 +61,13 @@ class StorageView(APIView):
             )
 
     def post(self, request):
-
         if request.method == "POST":
             file_obj = request.FILES.get("file")
             user_storage = request.POST.get("user_storage")
-            user = User.objects.get(username=user_storage)
+            user = UserCloud.objects.get(username=user_storage)
 
             if file_obj:
                 file_name = file_obj.name
-                # file_type = mime_to_extension(file_obj.content_type)
                 file_type = file_obj.content_type
                 file_size = file_obj.size
                 comment = request.POST.get("comment")
@@ -98,7 +91,7 @@ class StorageView(APIView):
 
     def delete(self, request, pk=None):
         user_id = request.GET.get("user_id")
-        target_user = User.objects.get(id=user_id)
+        target_user = UserCloud.objects.get(id=user_id)
         file_id = request.GET.get("file_id")
 
         if request.method == "DELETE" and request.user.is_authenticated:

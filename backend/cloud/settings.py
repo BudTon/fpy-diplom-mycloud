@@ -27,7 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", False)
+DEBUG = os.getenv("DEBUG", False) == 'True'
+print(DEBUG, " - DEBUG")
 
 ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS").split(",")]
 PORT = int(os.environ.get("PORT", "8000"))
@@ -49,7 +50,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "corsheaders",  # Нужно для CORS-поддержки
-
     "user",
     "rest_framework",
     "rest_framework.authtoken",  # Включаем support для токенов
@@ -137,8 +137,8 @@ DEFAULT_CHARSET = "UTF-8"
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
-MEDIA_URL = (os.getenv("MEDIA_URL"))
-MEDIA_ROOT = BASE_DIR / f"{(os.getenv("MEDIA_ROOT"))}"
+MEDIA_URL = os.getenv("MEDIA_URL")
+MEDIA_ROOT = BASE_DIR / f"{(os.getenv('MEDIA_ROOT'))}"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -146,7 +146,7 @@ MEDIA_ROOT = BASE_DIR / f"{(os.getenv("MEDIA_ROOT"))}"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # AUTHENTICATION SETTINGS
 
-AUTH_USER_MODEL = "auth.User"  # Стандартная модель пользователя Django
+AUTH_USER_MODEL = "user.UserCloud"  # Стандартная модель пользователя Django
 
 
 SESSION_SAVE_EVERY_REQUEST = True  # Сохранять сессию при каждом запросе
@@ -160,8 +160,11 @@ SESSION_COOKIE_HTTPONLY = True  # Доступ к cookie только через
 SESSION_COOKIE_SAMESITE = "Strict"  # Ограничивает cookie для того же сайта
 
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+print(CORS_ALLOWED_ORIGINS, "- CORS_ALLOWED_ORIGINS")
 CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
-CORS_EXPOSE_HEADERS = ['*']
+print(CSRF_TRUSTED_ORIGINS, "- CSRF_TRUSTED_ORIGINS")
+
+CORS_EXPOSE_HEADERS = ["*"]
 CORS_ALLOW_CREDENTIALS = True  # Позволяет использовать куки и сессии
 
 CORS_ALLOW_METHODS = [
@@ -200,4 +203,6 @@ REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",  # Только JSON-ответы
     ],
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,  # задаёшь количество элементов на одной странице
 }
