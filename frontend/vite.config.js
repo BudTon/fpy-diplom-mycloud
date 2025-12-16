@@ -10,6 +10,9 @@ export default defineConfig({
     jsxFragment: 'React.Fragment',
     include: /\.[jt]sx?$/,
   },
+  build: {
+    outDir: '../backend/frontend/dist', // Изменяем стандартный путь на ./distr
+  },
   // server: {
   //   proxy: {
   //     '^(?!(.*\.html)|(.js))$': {

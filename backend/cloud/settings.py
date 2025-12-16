@@ -170,6 +170,8 @@ SESSION_COOKIE_HTTPONLY = True  # Доступ к cookie только через
 
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
+    print(CORS_ALLOW_ALL_ORIGINS, "- CORS_ALLOW_ALL_ORIGINS")
+
 else:
     CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
     [
@@ -178,12 +180,12 @@ else:
     ]
     CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
     print(CSRF_TRUSTED_ORIGINS, "- CSRF_TRUSTED_ORIGINS")
+    print(CORS_ALLOWED_ORIGINS, "- CORS_ALLOWED_ORIGINS")
 
 # CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
-print(CORS_ALLOWED_ORIGINS, "- CORS_ALLOWED_ORIGINS")
 # CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
-
 # CORS_EXPOSE_HEADERS = ["*"]
+
 CORS_ALLOW_CREDENTIALS = True  # Позволяет использовать куки и сессии
 
 CORS_ALLOW_METHODS = [
