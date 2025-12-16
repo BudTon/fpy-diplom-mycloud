@@ -37,59 +37,27 @@
 ```bash
   cp .env.example .env
 ```
-9. Создаём базу данных с учётом настроек указанных в файле `.env`:
-<!-- ```bash
-  createdb -U <USER_PSQL> <NAME_PSQL>
-```
-```
-  Пароль: <PASSWORD_PSQL>
-``` -->
-*  для Windows
+9. Создаём базу данных и запускаем сервер с учётом настроек указанных в файле `.env`:
+10.
 ```bash
-(Get-Content .env) -notmatch '^#' |
-    Where-Object {$_ -ne ""} |
-    ForEach-Object {
-        $parts = $_.Trim().Split('=', 2);
-        if($parts.Count -eq 2){
-            Set-Item -Path "Env:$($parts[0].Trim())" -Value $($parts[1].Trim())
-        }
-    };
-& {createdb -h localhost -p 5432 -U "$env:USER_PSQL" "$env:NAME_PSQL"}
-```
-*  для Linux/MacOS
-```bash
-export $(grep -v '^#' .env | xargs); createdb -h localhost -p 5432 -U "$POSTGRES_USER" "$POSTGRES_DB"
+  python setup.py
 ```
 
 ***ВНИМАНИЕ!!!*** Убедитесь, что сервер PostgreSQL запущен.
 
-10. Создаем макет миграций:
+10. Открываем второй терминал в директории `frontend` в папке `fpy-diplom-mycloud`
+11.  В файле `.env` указываем базовый URL сервера и количество элементов для пагинации страницы:
+```bash
+  VITE_BASE_URL=http://127.0.0.1:8000/
 
-```bash
-  python manage.py makemigrations user
-```
-11. Применяем миграции:
-```bash
-  python manage.py migrate
-```
-12.  Запускаем сервер:
-```bash
-  python manage.py runserver
-```
-13. Открываем второй терминал в директории `frontend` в папке `fpy-diplom-mycloud`
-14.  В файле `.env` указываем базовый URL сервера и пароль прав администратора:
-```bash
-  VITE_SERVER_URL=http://127.0.0.1:8000/
-  VITE_ADMIN_PASSWORD=admin
+  VITE_ITEMS_PER_PAGE=10
 ```
 
-Принцип присвоения прав администратора реализаван при регистрации нового пользователя. Пароль присвоения прав администратора заполняется в поле <VITE_ADMIN_PASSWORD> данного файла и проверяется при регистрации нового пользователя.
-
-15.  Устанавливаем необходимые зависимости:
+12.  Устанавливаем необходимые зависимости:
    ```
    yarn install
    ```
-16.  Запускаем приложение:
+13.  Запускаем приложение:
    ```
    yarn dev
    ```
