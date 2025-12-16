@@ -12,7 +12,7 @@ import './login-form.css';
 export default function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { results } = useSelector((state) => state.user);
+  const { results } = useSelector((state) => state.login);
   const { isModalLoginForm } = useSelector((state) => state.form);
 
   useEffect(() => {

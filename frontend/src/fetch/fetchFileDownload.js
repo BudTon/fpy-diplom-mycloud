@@ -4,7 +4,7 @@ export const fetchFileDownload = createAsyncThunk(
   "storage/downloadFile",
   async (results, { rejectWithValue, getState }) => {
     const { fileId, file_name } = results
-    const { token } = getState().user.results;
+    const { token } = getState().login.results;
     const BASE_URL = import.meta.env.VITE_BASE_URL;
     const fetchUrl = `${BASE_URL}storage/files/${fileId}/`
 

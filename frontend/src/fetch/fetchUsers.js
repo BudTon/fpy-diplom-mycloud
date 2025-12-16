@@ -4,7 +4,7 @@ export const fetchUsers = createAsyncThunk(
   'users',
   async (results, { rejectWithValue, getState }) => {
     const { userId, page } = results
-    const { token } = getState().user.results;
+    const { token } = getState().login.results;
     const BASE_URL = import.meta.env.VITE_BASE_URL;
     let fetchUrl = `${BASE_URL}users/`
 

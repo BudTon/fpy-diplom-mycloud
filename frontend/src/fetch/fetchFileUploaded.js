@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchFileUploaded = createAsyncThunk(
   'storege_uploaded',
   async (values, { rejectWithValue, getState }) => {
-    const results = getState().user.results;
+    const results = getState().login.results;
     const userNameStorage = getState().file.results.user_name
     const token = results?.token;
     const formData = new FormData();

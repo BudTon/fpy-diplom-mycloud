@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchFileDelete = createAsyncThunk(
   'storage/deleteFile',
   async (results, { rejectWithValue, getState }) => {
-    const token = getState().user.results?.token;
+    const token = getState().login.results?.token;
     const { fileId, userId } = results;
     const BASE_URL = import.meta.env.VITE_BASE_URL;
 

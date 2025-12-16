@@ -7,7 +7,7 @@ import './file-property.css';
 export default function FileProperty({ file, currentPage, index }) {
   const { file_name, comment, size, created_at, lastDownloadDate,} = file;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const token = useSelector((state) => state.user.results).token;
+  const token = useSelector((state) => state.login.results).token;
   const { userId } = useSelector((state) => state.file.results);
 
   const handleCloseModal = () => {

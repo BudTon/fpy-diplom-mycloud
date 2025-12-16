@@ -19,7 +19,7 @@ export const StorageUsers = () => {
 
   useEffect(() => {
     dispatch(fetchUsers({ userId: file.userId, page: currentPage }));
-  }, [dispatch, currentPage, file.userId]);
+  }, [dispatch, currentPage]);
 
 
 

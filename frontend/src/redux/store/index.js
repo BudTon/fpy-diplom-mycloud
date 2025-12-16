@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userSlice from "../slices/userSlice";
+import loginSlice from "../slices/loginSlice";
 import fileSlice from "../slices/fileSlice";
 import menuRegSlice from "../slices/menuRegSlice";
 import menuSlice from "../slices/menuSlice";
@@ -9,7 +9,7 @@ import usersSlice from "../slices/usersSlice ";
 
 export const store = configureStore({
   reducer: {
-    user: userSlice,
+    login: loginSlice,
     users: usersSlice,
     file: fileSlice,
     menuReg: menuRegSlice,

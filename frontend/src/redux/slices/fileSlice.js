@@ -1,10 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchFileUser } from '../../fetch/fetchFileUser';
+// import { setUserId } from './actions';
 
 const initialState = {
   value: '',
   visible: true,
-  results: [],
+  results: {
+    userId: null,
+  },
   loading: false,
   error: null,
 };
@@ -17,6 +20,11 @@ const fileSlice = createSlice({
       state.value = '';
       state.results = [];
       state.error = null;
+    },
+    setUserId: (state, action) => {
+      console.log(action.payload, ' - action.payload');
+
+      state.results.userId = action.payload;
     },
   },
   extraReducers(builder) {
@@ -35,5 +43,5 @@ const fileSlice = createSlice({
   },
 });
 
-export const { clear } = fileSlice.actions;
+export const { clear, setUserId } = fileSlice.actions;
 export default fileSlice.reducer;
