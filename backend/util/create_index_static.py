@@ -47,7 +47,7 @@ def create_index_static():
   <head>
     {{% load static %}}
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href={{"% static '/favicon.ico' %"}} />
+    <link rel="icon" type="image/svg+xml" href="{{% static '/favicon.ico' %}}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cloud_frontend</title>
     <script type="module" crossorigin src="{{% static '{js_file}' %}}"></script>

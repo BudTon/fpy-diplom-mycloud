@@ -12,7 +12,12 @@ export default defineConfig({
   },
   build: {
     outDir: '../backend/frontend/dist', // Изменяем стандартный путь на ./distr
+  //   rollupOptions: {
+  //     input: 'src/index.html', // Исходный шаблон
+  //   },
+    manifest: true, // Генерируем манифест с динамическими именами файлов
   },
+
   // server: {
   //   proxy: {
   //     '^(?!(.*\.html)|(.js))$': {
