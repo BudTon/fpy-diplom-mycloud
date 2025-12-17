@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     "corsheaders",  # Нужно для CORS-поддержки
     "user",
     "rest_framework",
-    "rest_framework.authtoken",  # Включаем support для токенов
+    "rest_framework.authtoken",  # Включаем support для токенов.
 ]
 
 MIDDLEWARE = [
@@ -70,19 +70,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "cloud.urls"
 
-
-
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "cloud" / "user" / "templates"],
+        "DIRS": [
+            BASE_DIR / "frontend/dist",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "django.template.context_processors.csrf",
             ],
         },
     },
@@ -145,9 +145,12 @@ STATICFILES_DIRS = [
     BASE_DIR / "frontend/dist",  # после сборки React
 ]
 
-STATIC_URL = "static/"
-MEDIA_URL = os.getenv("MEDIA_URL")
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / f"{(os.getenv('MEDIA_ROOT'))}"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

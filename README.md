@@ -17,47 +17,53 @@
 2. Открываем и запускаем встроенный терминал в созданной папке
 3. Клонируем репозиторий:
 ```bash
-  git clone https://github.com/BudTon/fpy-diplom-mycloud.git
+git clone https://github.com/BudTon/fpy-diplom-mycloud.git
 ```
 4. Переходим в папку `fpy-diplom-mycloud` затем в директорию `backend` и запускаем встроенный терминал
 
 5. Создаём виртуальное окружение:
 ```bash
-  python -m venv env
+python -m venv env
 ```
 6. Активируем виртуальное окружение:
 ```bash
-  env/Scripts/activate
+env/Scripts/activate
 ```
 7. Устанавливаем зависимости:
 ```bash
-  pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 8. Копируем файл .env.example в новый файл .env и редактируем его в соответствии с шаблоном:
 ```bash
-  cp .env.example .env
+cp .env.example .env
 ```
-9. Создаём базу данных и запускаем сервер с учётом настроек указанных в файле `.env`:
-10.
+9. Открываем второй терминал в директории `frontend` в папке `fpy-diplom-mycloud`
+
+10.  В файле `.env` указываем базовый URL сервера и количество элементов для пагинации страницы:
+```bash
+VITE_BASE_URL=http://127.0.0.1:8000/
+
+VITE_ITEMS_PER_PAGE=10
+```
+
+11.  Устанавливаем необходимые зависимости:
+```bash
+yarn add vite
+```
+
+12. Собираем статические файлы `frontend` в папку `backend\frontend\distr`
+```bash
+yarn build
+```
+
+13. Создаём базу данных и запускаем сервер с учётом настроек указанных в файле `.env` и созданных статических данных:
+
 ```bash
   python setup.py
 ```
 
 ***ВНИМАНИЕ!!!*** Убедитесь, что сервер PostgreSQL запущен.
 
-10. Открываем второй терминал в директории `frontend` в папке `fpy-diplom-mycloud`
-11.  В файле `.env` указываем базовый URL сервера и количество элементов для пагинации страницы:
-```bash
-  VITE_BASE_URL=http://127.0.0.1:8000/
+14. Теперь приложение развернуто на одном локальном сервере http://127.0.0.1:8000/
 
-  VITE_ITEMS_PER_PAGE=10
-```
 
-12.  Устанавливаем необходимые зависимости:
-   ```
-   yarn install
-   ```
-13.  Запускаем приложение:
-   ```
-   yarn dev
-   ```
