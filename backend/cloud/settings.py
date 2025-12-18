@@ -178,8 +178,7 @@ if DEBUG:
 else:
     CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
     [
-        "https://ваш-домен.reg.ru",
-        "https://www.ваш-домен.reg.ru",
+        "http://ваш-домен.reg.ru",
     ]
     CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
     print(CSRF_TRUSTED_ORIGINS, "- CSRF_TRUSTED_ORIGINS")

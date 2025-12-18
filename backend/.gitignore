@@ -51,7 +51,7 @@ cover/
 db.sqlite3
 # migrations/
 media/
-staticfiles/
+#staticfiles/
 *.backup
 *.sql
 *.dump

@@ -68,3 +68,254 @@ python setup.py
 15. Теперь приложение развернуто на одном локальном сервере http://127.0.0.1:8000/
 
 
+## Развёртывание приложения на облачном сервере
+
+1. Выбираем на сайте [reg.ru](https://cloud.reg.ru) параметры облачного сервера:
+  - образ - `Ubuntu 22.04 LTS`
+   - vCPU и тип диска - `Стандартный`
+   - тариф - `HP C1-M1-D10`
+   - регион размещения - `Москва`
+
+###  Нажимаем кнопку `Заказать сервер`
+
+   Получаем по электронной почте данные для подключения к серверу через SSH.
+2. Запускаем терминал и подключаемся к серверу, используя полученные данные:
+```bash
+ssh root@<ip адрес сервера>
+```
+   Вводим пароль
+3. Создаем нового пользователя:
+```bash
+adduser <имя пользователя>
+```
+4. Добавляем созданного пользователя в группу `sudo`:
+```bash
+usermod <имя пользователя> -aG sudo
+```
+5. Выходим из-под пользователя `root`:
+```bash
+logout
+```
+6. Подключаемся к серверу под новым пользователем:
+```bash
+ssh <имя пользователя>@<ip адрес сервера>
+```
+7. Скачиваем обновления пакетов `apt`:
+```bash
+sudo apt update
+```
+8. Устанавливаем необходимые пакеты:
+```bash
+sudo apt install python3-venv python3-pip postgresql nginx
+```
+9. Заходим в терминал `psql` под пользователем `postgres`:
+```bash
+sudo -u postgres psql
+```
+10.   Задаём пароль для пользователя `postgres`:
+```bash
+alter user postgres with password 'postgres';
+```
+11.   Выходим из терминала `psql`:
+```bash
+\q
+```
+12.   Клонируем репозиторий с проектом:
+```bash
+git clone https://github.com/BudTon/fpy-diplom-mycloud.git
+```
+13.   Переходим в папку `backend`:
+```bash
+cd /home/<имя пользователя>/fpy-diplom-mycloud/backend
+```
+14.   Устанавливаем виртуальное окружение:
+```bash
+python3 -m venv env
+```
+15.   Активируем его:
+```bash
+source env/bin/activate
+```
+16.   Устанавливаем необходимые зависимости:
+```bash
+pip install -r requirements.txt
+```
+17.   В папке `backend` копируем файл .env.example в новый файл .env и редактируем его в соответствии с шаблоном:
+```bash
+cp .env.example .env
+```
+ _`примечание`_: _Обязательные условия для настройки production переменных_
+```bash
+1 DEBUG=False
+2 ALLOWED_HOSTS=ваш-домен.reg.ru,ip-адрес
+3 CORS_ALLOWED_ORIGINS=https://ваш-домен.reg.ru
+```
+18.   Переходим в папку `frontend`:
+```bash
+cd ../frontend
+```
+19.   Pедактируем файл .env соответствии с шаблоном:
+```bash
+nano .env
+```
+20.Устанавливаем [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm):
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+```
+21.  Добавляем переменную окружения:
+```bash
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+```
+22.  Проверяем версию `nvm`:
+```bash
+nvm -v
+```
+23.  Устанавливаем нужную версию `node`:
+```bash
+nvm install <номер версии>
+```
+24.  Устанавливаем необходимые зависимости:
+```bash
+yarn add vite
+```
+25.  Производим сборку фронтенда:
+```bash
+yarn build
+```
+Полученные файлы сразу переносятся в папку `backend` директорию `/frontend/dist/`
+
+26. Переходим в папку `backend`
+```bash
+cd ../backend
+```
+27. Запускаем файл setup:
+```bash
+python setup.py
+```
+   поисходят следующие действия:
+   - Создание базы данных
+   - Выполнение миграций
+   - Создание суперпользователя по умолчаанию
+   - Собираем весь статичный контент в одну папку на сервере
+   - Запуск сервера
+
+28. Проверяем работу `gunicorn`:
+```bash
+gunicorn backend.wsgi -b 0.0.0.0:8000
+```
+29. Создаём сокет `gunicorn.socket`:
+```bash
+sudo nano /etc/systemd/system/gunicorn.socket
+```
+   со следующим содержимым
+
+```bash
+      [Unit]
+      Description=gunicorn socket
+
+      [Socket]
+      ListenStream=/run/gunicorn.sock
+
+      [Install]
+      WantedBy=sockets.target
+```
+30. Создаём сервис `gunicorn.service`:
+```bash
+   sudo nano /etc/systemd/system/gunicorn.service
+```
+   с содержимым
+
+```bash
+      [Unit]
+      Description=gunicorn daemon
+      Requires=gunicorn.socket
+      After=network.target
+
+      [Service]
+      User=<имя пользователя>
+      Group=www-data
+      WorkingDirectory=/home/<имя пользователя>/fpy-diplom-mycloud/backend
+      ExecStart=/home/<имя пользователя>/fpy-diplom-mycloud/backend/env/bin/gunicorn \
+               --access-logfile - \
+               --workers=3 \
+               --bind unix:/run/gunicorn.sock \
+               backend.wsgi:application
+
+      [Install]
+      WantedBy=multi-user.target
+```
+31. Запускаем сокет `gunicorn.socket`:
+```bash
+sudo systemctl start gunicorn.socket
+```
+```bash
+sudo systemctl enable gunicorn.socket
+```
+32. Проверяем его статус:
+```bash
+sudo systemctl status gunicorn.socket
+```
+33. Убеждаемся, что файл `gunicorn.sock` присутствует в папке `/run`:
+```bash
+file /run/gunicorn.sock
+```
+34. Проверяем статус `gunicorn`:
+```bash
+sudo systemctl status gunicorn
+```
+35. Создаём модуль `nginx`:
+```bash
+sudo nano /etc/nginx/sites-available/backend
+```
+   со следующим содержимым
+
+```bash
+      server {
+         listen 80;
+         server_name <ip адрес сервера>;
+
+         location = /favicon.ico {
+            access_log off;
+            log_not_found off;
+         }
+
+         location /static/ {
+            root /home/<имя пользователя>/fpy-diplom-mycloud/backend;
+         }
+
+         location / {
+            include proxy_params;
+            proxy_pass http://unix:/run/gunicorn.sock;
+         }
+      }
+```
+36. Активируем виртуальный хост, создаём символическую ссылку:
+```bash
+sudo ln -s /etc/nginx/sites-available/backend /etc/nginx/sites-enabled
+```
+37.  Диагностируем `nginx` на предмет ошибок в синтаксисе:
+```bash
+sudo nginx -t
+```
+38.  Перезапускаем веб-сервер:
+```bash
+sudo systemctl restart nginx
+```
+39.  Проверяем статус `nginx`:
+```bash
+sudo systemctl status nginx
+```
+40.  При помощи `firewall` даём полные права `nginx` для подключений:
+```bash
+sudo ufw allow 'Nginx Full'
+```
+41. Проверяем доступ к сайту:
+```bash
+http://<ip адрес сервера>
+```
+42.  Проверяем доступ к административной панели:
+```bash
+http://<ip адрес сервера>/admin/
+```
+
