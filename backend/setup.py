@@ -18,7 +18,7 @@ print("Суперпользователь создан.")
 
 # Собираем весь статичный контент в одну папку на сервере:
 print("Собираем весь статичный контент в одну папку на сервере")
-subprocess.run(["python", "util", "create_index_static.py"])
+subprocess.run(["python", "create_index_static.py"])
 subprocess.run(["python", "manage.py", "collectstatic"])
 print("Статитака собрана")
 
