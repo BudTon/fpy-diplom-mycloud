@@ -8,7 +8,7 @@
 1. Локальную версию:
    - Бэкенд на Python с использованием фреймворка Django и СУБД PostgreSQL.
    - Фронтенд на JavaScript с использованием React, Redux и React Router.
-2. Развернутое на сервере REG.RU [приложение](http://95.163.232.154/).
+2. Развернутое на сервере REG.RU [приложение](http://194.67.124.226/).
 
 
 ## Инструкция по запуску локальной версии
@@ -112,6 +112,10 @@ sudo apt install python3-venv python3-pip postgresql nginx
 ```bash
 sudo -u postgres psql
 ```
+10. Создаём базу данных:
+```bash
+CREATE DATABASE cloud_diploma;
+```
 10.   Задаём пароль для пользователя `postgres`:
 ```bash
 alter user postgres with password 'postgres';
@@ -144,11 +148,14 @@ pip install -r requirements.txt
 ```bash
 cp .env.example .env
 ```
+```bash
+nano .env
+```
  _`примечание`_: _Обязательные условия для настройки production переменных_
 ```bash
 1 DEBUG=False
 2 ALLOWED_HOSTS=ваш-домен.reg.ru,ip-адрес
-3 CORS_ALLOWED_ORIGINS=https://ваш-домен.reg.ru
+3 CORS_ALLOWED_ORIGINS=http://ваш-домен.reg.ru
 ```
 18.   Переходим в папку `frontend`:
 ```bash
@@ -173,38 +180,66 @@ nvm -v
 ```
 23.  Устанавливаем нужную версию `node`:
 ```bash
-nvm install <номер версии>
+nvm install v24.2.0
 ```
 24.  Устанавливаем необходимые зависимости:
 ```bash
+npm install -g yarn
+```
+25.  Устанавливаем необходимые зависимости:
+```bash
 yarn add vite
 ```
-25.  Производим сборку фронтенда:
+26.  Создаем и заполняем файл .env
+```bash
+nano .env
+```
+```
+VITE_BASE_URL=http://ваш-домен.reg.ru
+
+VITE_ITEMS_PER_PAGE=10
+
+```
+
+27.  Производим сборку фронтенда:
 ```bash
 yarn build
 ```
 Полученные файлы сразу переносятся в папку `backend` директорию `/frontend/dist/`
 
-26. Переходим в папку `backend`
+28. Переходим в папку `backend`
 ```bash
 cd ../backend
 ```
-27. Запускаем файл setup:
+29. Проверяем создание макетов моделий:
 ```bash
-python setup.py
+python manage.py makemigrations user
 ```
-   поисходят следующие действия:
-   - Создание базы данных
-   - Выполнение миграций
-   - Создание суперпользователя по умолчаанию
-   - Собираем весь статичный контент в одну папку на сервере
-   - Запуск сервера
-
-28. Проверяем работу `gunicorn`:
+30. Применяем миграции:
 ```bash
-gunicorn backend.wsgi -b 0.0.0.0:8000
+python manage.py migrate
 ```
-29. Создаём сокет `gunicorn.socket`:
+31. Создаём суперпользователя:
+```bash
+python manage.py create_superuser
+```
+32. Добавляем шаблон {%static%} в файл index.html:
+```bash
+python create_index_static.py
+```
+33. Собираем весь статичный контент в одну папку на сервере:
+```bash
+python manage.py collectstatic
+```
+34. Запускаем сервер:
+```bash
+python manage.py runserver 0.0.0.0:8000
+```
+35.  Проверяем работу `gunicorn`:
+```bash
+gunicorn cloud.wsgi -b 0.0.0.0:8000
+```
+36.  Создаём сокет `gunicorn.socket`:
 ```bash
 sudo nano /etc/systemd/system/gunicorn.socket
 ```
@@ -220,51 +255,51 @@ sudo nano /etc/systemd/system/gunicorn.socket
       [Install]
       WantedBy=sockets.target
 ```
-30. Создаём сервис `gunicorn.service`:
+37. Создаём сервис `gunicorn.service`:
 ```bash
    sudo nano /etc/systemd/system/gunicorn.service
 ```
    с содержимым
 
 ```bash
-      [Unit]
-      Description=gunicorn daemon
-      Requires=gunicorn.socket
-      After=network.target
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
 
-      [Service]
-      User=<имя пользователя>
-      Group=www-data
-      WorkingDirectory=/home/<имя пользователя>/fpy-diplom-mycloud/backend
-      ExecStart=/home/<имя пользователя>/fpy-diplom-mycloud/backend/env/bin/gunicorn \
-               --access-logfile - \
-               --workers=3 \
-               --bind unix:/run/gunicorn.sock \
-               backend.wsgi:application
+[Service]
+User=<имя пользователя>
+Group=www-data
+WorkingDirectory=/home/<имя пользователя>/fpy-diplom-mycloud/backend
+ExecStart=/home/<имя пользователя>/fpy-diplom-mycloud/backend/env/bin/gunicorn \
+         --access-logfile - \
+         --workers=3 \
+         --bind unix:/run/gunicorn.sock \
+         cloud.wsgi:application
 
-      [Install]
-      WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target
 ```
-31. Запускаем сокет `gunicorn.socket`:
+38. Запускаем сокет `gunicorn.socket`:
 ```bash
 sudo systemctl start gunicorn.socket
 ```
 ```bash
 sudo systemctl enable gunicorn.socket
 ```
-32. Проверяем его статус:
+39. Проверяем его статус:
 ```bash
 sudo systemctl status gunicorn.socket
 ```
-33. Убеждаемся, что файл `gunicorn.sock` присутствует в папке `/run`:
+40. Убеждаемся, что файл `gunicorn.sock` присутствует в папке `/run`:
 ```bash
 file /run/gunicorn.sock
 ```
-34. Проверяем статус `gunicorn`:
+41. Проверяем статус `gunicorn`:
 ```bash
 sudo systemctl status gunicorn
 ```
-35. Создаём модуль `nginx`:
+42. Создаём модуль `nginx`:
 ```bash
 sudo nano /etc/nginx/sites-available/backend
 ```
@@ -281,11 +316,7 @@ sudo nano /etc/nginx/sites-available/backend
          }
 
          location /static/ {
-            root /home/<имя пользователя>/fpy-diplom-mycloud/static/;
-         }
-
-         location /storage/ {
-            alias /home/<имя пользователя>/fpy-diplom-mycloud/static/;
+            alias /home/<имя пользователя>/fpy-diplom-mycloud/backend/static/;
          }
 
          location / {
@@ -295,31 +326,35 @@ sudo nano /etc/nginx/sites-available/backend
 
       }
 ```
-1.  Активируем виртуальный хост, создаём символическую ссылку:
+44.  Активируем виртуальный хост, создаём символическую ссылку:
 ```bash
 sudo ln -s /etc/nginx/sites-available/backend /etc/nginx/sites-enabled
 ```
-1.   Диагностируем `nginx` на предмет ошибок в синтаксисе:
+45. Добавляем пользователя `www-data` в группу текущего пользователя:
+```bash
+sudo usermod -aG <имя пользователя> www-data
+```
+46.   Диагностируем `nginx` на предмет ошибок в синтаксисе:
 ```bash
 sudo nginx -t
 ```
-1.   Перезапускаем веб-сервер:
+47.   Перезапускаем веб-сервер:
 ```bash
 sudo systemctl restart nginx
 ```
-1.   Проверяем статус `nginx`:
+48.   Проверяем статус `nginx`:
 ```bash
 sudo systemctl status nginx
 ```
-1.   При помощи `firewall` даём полные права `nginx` для подключений:
+49.   При помощи `firewall` даём полные права `nginx` для подключений:
 ```bash
 sudo ufw allow 'Nginx Full'
 ```
-1.  Проверяем доступ к сайту:
+50.  Проверяем доступ к сайту:
 ```bash
 http://<ip адрес сервера>
 ```
-1.   Проверяем доступ к административной панели:
+51.   Проверяем доступ к административной панели:
 ```bash
 http://<ip адрес сервера>/admin/
 ```

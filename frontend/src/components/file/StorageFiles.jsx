@@ -17,16 +17,11 @@ export function StorageFiles() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = +import.meta.env.VITE_ITEMS_PER_PAGE;
 
-  console.log(file, ' - file');
-
 
   useEffect(() => {
     dispatch(fetchFileUser({ userId: file.userId, page: currentPage }));
-    console.log(11111111);
-
   }, [dispatch, currentPage, file.userId]);
 
-  console.log(222222222);
 
   const handleCloseModalUpload = () => {
     setIsModalUploadOpen(false);

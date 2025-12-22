@@ -80,9 +80,9 @@ if settings.DEBUG:
     print("-----------------\n\nurls settings for local\n\n------------------")
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    urlpatterns += [
-        re_path(
-            r"^favicon\.ico$",
-            lambda r: redirect(settings.STATIC_URL + "favicon.ico"),
-        ),
-    ]
+    # urlpatterns += [
+    #     re_path(
+    #         r"^favicon\.ico$",
+    #         lambda r: redirect(settings.STATIC_URL + "favicon.ico"),
+    #     ),
+    # ]
