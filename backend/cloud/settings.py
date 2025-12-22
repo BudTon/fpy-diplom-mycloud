@@ -150,10 +150,12 @@ STATICFILES_DIRS = [
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
 
-MEDIA_URL = "/media/"
+# MEDIA_URL = "/storage/"
+MEDIA_URL = os.getenv("MEDIA_URL")
 MEDIA_ROOT = BASE_DIR / f"{(os.getenv('MEDIA_ROOT'))}"
 
-
+print(MEDIA_URL)
+print(MEDIA_ROOT)
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -173,18 +175,13 @@ SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Хранение се�
 SESSION_COOKIE_HTTPONLY = True  # Доступ к cookie только через HTTP
 # SESSION_COOKIE_SAMESITE = "Strict"  # Ограничивает cookie для того же сайта
 
+
 if DEBUG:
     CORS_ALLOW_ALL_ORIGINS = True
-    print(CORS_ALLOW_ALL_ORIGINS, "- CORS_ALLOW_ALL_ORIGINS")
-
 else:
     CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
-    # [
-    #     "http://ваш-домен.reg.ru",
-    # ]
     CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
-    print(CSRF_TRUSTED_ORIGINS, "- CSRF_TRUSTED_ORIGINS")
-    print(CORS_ALLOWED_ORIGINS, "- CORS_ALLOWED_ORIGINS")
+
 
 # CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
 # CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")

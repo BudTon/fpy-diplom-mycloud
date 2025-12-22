@@ -181,9 +181,9 @@ docker-compose-data/
 *.gz
 
 # Логи и отладочные файлы
-*.log
+!*.log
 *.log.*
-logs/
+!logs/
 debug/
 *.debug
 *.trace

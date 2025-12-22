@@ -1,0 +1,389 @@
+INFO 2025-12-22 20:55:52,915 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 20:56:37,419 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 20:57:00,753 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 20:57:27,353 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 20:57:33,044 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 20:57:36,449 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 20:57:38,243 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 20:57:50,529 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 20:57:53,212 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 20:58:24,837 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 20:58:27,136 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 20:59:07,610 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 20:59:19,866 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:00:41,834 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:00:46,321 home_views Начало обработки запроса на просмотр статистики хранилища.
+INFO 2025-12-22 21:00:46,746 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
+INFO 2025-12-22 21:00:46,749 basehttp "GET /home/ HTTP/1.1" 200 124
+ERROR 2025-12-22 21:01:02,026 log Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:01:02,031 basehttp "GET / HTTP/1.1" 500 90874
+ERROR 2025-12-22 21:01:02,371 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:01:02,375 basehttp "GET /favicon.ico HTTP/1.1" 500 90633
+ERROR 2025-12-22 21:01:20,572 log Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:01:20,575 basehttp "GET / HTTP/1.1" 500 90730
+ERROR 2025-12-22 21:01:20,718 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:01:20,723 basehttp "GET /favicon.ico HTTP/1.1" 500 90633
+INFO 2025-12-22 21:01:37,585 basehttp code 400, message Bad request version ('ÕYO\x1a¯qX$6L2¹ç$äøt\x11éÇFF\x94ýp^')
+ERROR 2025-12-22 21:01:37,586 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-22 21:01:37,587 basehttp code 400, message Bad request version ('\x98\x0f\x18§{\x13#\x00')
+ERROR 2025-12-22 21:01:37,589 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-22 21:01:37,638 basehttp code 400, message Bad request version ('È')
+ERROR 2025-12-22 21:01:37,639 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+INFO 2025-12-22 21:01:37,639 basehttp code 400, message Bad HTTP/0.9 request type ('\x16\x03\x01\x07\x00\x01\x00\x06ü\x03\x03ìz\x89=µ\x049¸\x7f')
+ERROR 2025-12-22 21:01:37,656 basehttp You're accessing the development server over HTTPS, but it only supports HTTP.
+ERROR 2025-12-22 21:01:50,730 log Internal Server Error: /l
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:01:50,733 basehttp "GET /l HTTP/1.1" 500 90739
+ERROR 2025-12-22 21:01:51,033 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:01:51,035 basehttp "GET /favicon.ico HTTP/1.1" 500 90634
+INFO 2025-12-22 21:02:11,193 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 21:02:12,581 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:02:15,107 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 21:02:16,502 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:02:23,297 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 21:02:24,729 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:02:28,055 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 21:02:30,117 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-22 21:02:36,434 log Internal Server Error: /l
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:02:36,439 basehttp "GET /l HTTP/1.1" 500 90872
+ERROR 2025-12-22 21:02:36,678 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:02:36,683 basehttp "GET /favicon.ico HTTP/1.1" 500 90630
+INFO 2025-12-22 21:04:51,291 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-22 21:05:02,763 log Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:05:02,768 basehttp "GET / HTTP/1.1" 500 90730
+ERROR 2025-12-22 21:05:02,963 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:05:02,967 basehttp "GET /favicon.ico HTTP/1.1" 500 90633
+INFO 2025-12-22 21:06:23,335 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 21:06:24,749 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:06:28,458 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 21:06:29,670 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:07:01,215 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\settings.py changed, reloading.
+INFO 2025-12-22 21:07:02,510 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:08:13,987 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\urls.py changed, reloading.
+INFO 2025-12-22 21:08:15,229 autoreload Watching for file changes with StatReloader
+ERROR 2025-12-22 21:08:19,030 log Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:08:19,038 basehttp "GET / HTTP/1.1" 500 90867
+ERROR 2025-12-22 21:08:19,237 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:08:19,241 basehttp "GET /favicon.ico HTTP/1.1" 500 90633
+ERROR 2025-12-22 21:08:40,630 log Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:08:40,634 basehttp "GET / HTTP/1.1" 500 90730
+ERROR 2025-12-22 21:08:40,777 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:08:40,782 basehttp "GET /favicon.ico HTTP/1.1" 500 90633
+ERROR 2025-12-22 21:08:43,007 log Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:08:43,010 basehttp "GET / HTTP/1.1" 500 90867
+ERROR 2025-12-22 21:08:43,160 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:08:43,165 basehttp "GET /favicon.ico HTTP/1.1" 500 90633
+INFO 2025-12-22 21:09:12,313 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\urls.py changed, reloading.
+INFO 2025-12-22 21:09:13,974 autoreload Watching for file changes with StatReloader
+WARNING 2025-12-22 21:09:15,419 log Unauthorized: /
+WARNING 2025-12-22 21:09:15,420 basehttp "GET / HTTP/1.1" 401 82
+ERROR 2025-12-22 21:09:15,571 log Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 90, in rendered_content
+    template = self.resolve_template(self.template_name)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\response.py", line 72, in resolve_template
+    return select_template(template, using=self.using)
+  File "D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\env\Lib\site-packages\django\template\loader.py", line 47, in select_template
+    raise TemplateDoesNotExist(", ".join(template_name_list), chain=chain)
+django.template.exceptions.TemplateDoesNotExist: index.html
+ERROR 2025-12-22 21:09:15,580 basehttp "GET /favicon.ico HTTP/1.1" 500 90633
+INFO 2025-12-22 21:09:22,940 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\cloud\urls.py changed, reloading.
+INFO 2025-12-22 21:09:24,137 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:11:28,226 autoreload Watching for file changes with StatReloader
+INFO 2025-12-22 21:11:34,529 basehttp "GET / HTTP/1.1" 200 490
+INFO 2025-12-22 21:11:34,741 basehttp "GET /static/assets/index-CA2vYS1P.css HTTP/1.1" 200 8716
+INFO 2025-12-22 21:11:34,751 basehttp "GET /static/assets/index-Bnl-rVBE.js HTTP/1.1" 200 350371
+INFO 2025-12-22 21:11:34,917 home_views Начало обработки запроса на просмотр статистики хранилища.
+INFO 2025-12-22 21:11:34,922 basehttp "GET /static/favicon.ico HTTP/1.1" 304 0
+INFO 2025-12-22 21:11:35,101 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
+INFO 2025-12-22 21:11:35,102 basehttp "GET /home/ HTTP/1.1" 200 124
+INFO 2025-12-22 21:13:12,334 basehttp "OPTIONS /home/ HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:12,347 home_views Начало обработки запроса на просмотр статистики хранилища.
+INFO 2025-12-22 21:13:12,463 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
+INFO 2025-12-22 21:13:12,465 basehttp "GET /home/ HTTP/1.1" 200 124
+INFO 2025-12-22 21:13:23,209 basehttp "OPTIONS /login/ HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:23,212 auth_views Начало попытки входа пользователя с логином: admin
+INFO 2025-12-22 21:13:25,277 auth_views Успешный вход пользователя: admin. Ответ: {'token': '1c9498c00a99102080569983cc990e748c12607d', 'status': 'ok', 'userId': 1, 'isStaff': True}
+INFO 2025-12-22 21:13:25,282 basehttp "POST /login/ HTTP/1.1" 200 92
+INFO 2025-12-22 21:13:25,293 basehttp "OPTIONS /storage/?user_id=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:25,315 basehttp "OPTIONS /storage/?page=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:25,476 storage_views Получена информация о хранении для пользователя admin. Всего страниц: 1.
+INFO 2025-12-22 21:13:25,478 storage_views Получена информация о хранении для пользователя admin. Всего страниц: 1.
+INFO 2025-12-22 21:13:25,479 basehttp "GET /storage/?user_id=1 HTTP/1.1" 200 2566
+INFO 2025-12-22 21:13:25,482 basehttp "GET /storage/?page=1 HTTP/1.1" 200 2566
+INFO 2025-12-22 21:13:25,520 basehttp "OPTIONS /storage/?user_id=1&page=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:25,674 storage_views Получена информация о хранении для пользователя admin. Всего страниц: 1.
+INFO 2025-12-22 21:13:25,675 basehttp "GET /storage/?user_id=1&page=1 HTTP/1.1" 200 2566
+INFO 2025-12-22 21:13:27,892 basehttp "OPTIONS /users/?user_id=1&page=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:28,152 user_views Получена информация о хранилище для пользователя admin. Всего страниц: 2.
+INFO 2025-12-22 21:13:28,153 basehttp "GET /users/?user_id=1&page=1 HTTP/1.1" 200 1343
+INFO 2025-12-22 21:13:31,324 basehttp "OPTIONS /storage/?user_id=6&page=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:31,539 storage_views Получена информация о хранении для пользователя user4. Всего страниц: 1.
+INFO 2025-12-22 21:13:31,540 basehttp "GET /storage/?user_id=6&page=1 HTTP/1.1" 200 164
+INFO 2025-12-22 21:13:32,998 basehttp "OPTIONS /users/?user_id=6&page=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:33,102 user_views Получена информация о хранилище для пользователя user4. Всего страниц: 2.
+INFO 2025-12-22 21:13:33,103 basehttp "GET /users/?user_id=6&page=1 HTTP/1.1" 200 1343
+INFO 2025-12-22 21:13:36,288 basehttp "OPTIONS /users/?user_id=6&page=2 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:36,377 user_views Получена информация о хранилище для пользователя user4. Всего страниц: 2.
+INFO 2025-12-22 21:13:36,378 basehttp "GET /users/?user_id=6&page=2 HTTP/1.1" 200 277
+INFO 2025-12-22 21:13:38,177 basehttp "OPTIONS /storage/?user_id=11&page=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:38,271 storage_views Получена информация о хранении для пользователя user9. Всего страниц: 1.
+INFO 2025-12-22 21:13:38,272 basehttp "GET /storage/?user_id=11&page=1 HTTP/1.1" 200 165
+INFO 2025-12-22 21:13:40,748 basehttp "OPTIONS /users/?user_id=11&page=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:40,852 user_views Получена информация о хранилище для пользователя user9. Всего страниц: 2.
+INFO 2025-12-22 21:13:40,853 basehttp "GET /users/?user_id=11&page=1 HTTP/1.1" 200 1344
+INFO 2025-12-22 21:13:42,260 basehttp "OPTIONS /storage/?user_id=13&page=1 HTTP/1.1" 200 0
+INFO 2025-12-22 21:13:42,388 storage_views Получена информация о хранении для пользователя user11. Всего страниц: 1.
+INFO 2025-12-22 21:13:42,390 basehttp "GET /storage/?user_id=13&page=1 HTTP/1.1" 200 166
+INFO 2025-12-22 21:14:08,754 home_views Начало обработки запроса на просмотр статистики хранилища.
+INFO 2025-12-22 21:14:08,835 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
+INFO 2025-12-22 21:14:08,837 basehttp "GET /home/ HTTP/1.1" 200 124
+INFO 2025-12-22 21:14:09,761 home_views Начало обработки запроса на просмотр статистики хранилища.
+INFO 2025-12-22 21:14:09,981 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
+INFO 2025-12-22 21:14:09,986 basehttp "GET /home/ HTTP/1.1" 200 124

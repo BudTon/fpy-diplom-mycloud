@@ -70,10 +70,10 @@ urlpatterns = [
         FileChangeCommentView.as_view(),
         name="update-comment",
     ),
-    path("", include(router.urls)),
+    # path("", include(router.urls)),
     # path("", include("user.urls")),
-    # path("", TemplateView.as_view(template_name="index.html"), name="home"),
-    # re_path(r"^.*$", TemplateView.as_view(template_name="index.html")),
+    path("", TemplateView.as_view(template_name="index.html"), name="home"),
+    re_path(r"^.*$", TemplateView.as_view(template_name="index.html")),
 ]
 
 if settings.DEBUG:
