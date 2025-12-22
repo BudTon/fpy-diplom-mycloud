@@ -281,40 +281,45 @@ sudo nano /etc/nginx/sites-available/backend
          }
 
          location /static/ {
-            root /home/<имя пользователя>/fpy-diplom-mycloud/backend;
+            root /home/<имя пользователя>/fpy-diplom-mycloud/static/;
+         }
+
+         location /storage/ {
+            alias /home/<имя пользователя>/fpy-diplom-mycloud/static/;
          }
 
          location / {
             include proxy_params;
             proxy_pass http://unix:/run/gunicorn.sock;
          }
+
       }
 ```
-36. Активируем виртуальный хост, создаём символическую ссылку:
+1.  Активируем виртуальный хост, создаём символическую ссылку:
 ```bash
 sudo ln -s /etc/nginx/sites-available/backend /etc/nginx/sites-enabled
 ```
-37.  Диагностируем `nginx` на предмет ошибок в синтаксисе:
+1.   Диагностируем `nginx` на предмет ошибок в синтаксисе:
 ```bash
 sudo nginx -t
 ```
-38.  Перезапускаем веб-сервер:
+1.   Перезапускаем веб-сервер:
 ```bash
 sudo systemctl restart nginx
 ```
-39.  Проверяем статус `nginx`:
+1.   Проверяем статус `nginx`:
 ```bash
 sudo systemctl status nginx
 ```
-40.  При помощи `firewall` даём полные права `nginx` для подключений:
+1.   При помощи `firewall` даём полные права `nginx` для подключений:
 ```bash
 sudo ufw allow 'Nginx Full'
 ```
-41. Проверяем доступ к сайту:
+1.  Проверяем доступ к сайту:
 ```bash
 http://<ip адрес сервера>
 ```
-42.  Проверяем доступ к административной панели:
+1.   Проверяем доступ к административной панели:
 ```bash
 http://<ip адрес сервера>/admin/
 ```

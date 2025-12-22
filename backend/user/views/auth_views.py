@@ -1,39 +1,49 @@
 import os
-import json
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from user.models import UserCloud
+import logging
 from django.contrib.auth import authenticate, login
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from rest_framework import status
+from user.serializers import UserRegistrationSerializer
 
 
-@csrf_exempt
-def user_login(request):
-    if request.method != "POST":
-        return JsonResponse({"error": "Method Not Allowed"}, status=405)
-    body_unicode = request.body.decode("utf-8")
-    body_data = json.loads(body_unicode)
-    username = body_data.get("username")
-    password = body_data.get("password")
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        token, created = Token.objects.get_or_create(user=user)
-        return JsonResponse(
-            {
+logger = logging.getLogger(__name__)
+
+class LoginView(APIView):
+    authentication_classes = []
+    permission_classes = []
+
+    def post(self, request):
+        data = request.data
+        username = data.get("username")
+        password = data.get("password")
+
+        logger.info(f"Начало попытки входа пользователя с логином: {username}")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            token, _ = Token.objects.get_or_create(user=user)
+            response_data = {
                 "token": token.key,
                 "status": "ok",
                 "userId": user.id,
                 "isStaff": user.is_staff,
             }
-        )
-    else:
-        return JsonResponse(
-            {"status": "error", "message": "Invalid credentials."}, status=401
-        )
+            logger.info(
+                f"Успешный вход пользователя: {username}. Ответ: {response_data}"
+            )
+            return Response(response_data, status=status.HTTP_200_OK)
+        else:
+            logger.warning(
+                f"Ошибка входа пользователя: {username}. Неверные учётные данные."
+            )
+            return Response(
+                {"status": "error", "message": "Invalid credentials."},
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
 
 
 class RegistrationUserValidateView(APIView):
@@ -45,16 +55,13 @@ class RegistrationUserValidateView(APIView):
         auth_admin_server = os.getenv("SUPERUSER_PASSWORD")
 
         if auth_admin_frontend == auth_admin_server:
-            return JsonResponse(
-                {
-                    "validate": "True",
-                }
+            logger.info("Административная проверка прошла успешно.")
+            return Response({"validate": True})
+        else:
+            logger.warning(
+                "Ошибка административной проверки. Неправильные учётные данные администратора."
             )
-        return JsonResponse(
-            {
-                "validate": "False",
-            }
-        )
+            return Response({"validate": False}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class RegistrationView(APIView):
@@ -62,55 +69,17 @@ class RegistrationView(APIView):
     permission_classes = []
 
     def post(self, request):
-        username = request.data.get("username")
-        first_name = request.data.get("firstname")
-        email = request.data.get("email")
-        password = request.data.get("password")
-        is_staff = request.data.get("is_staff")
-        if not all([username, first_name, email, password]):
-            return Response(
-                {
-                    "error": "Все поля обязательны",
-                    "request_data": {
-                        "username": username,
-                        "firstname": first_name,
-                        "email": email,
-                        "password": password,
-                        "is_staff": is_staff,
-                    },
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
+        serializer = UserRegistrationSerializer(data=request.data)
 
-        if UserCloud.objects.filter(username=username).exists():
-            return Response(
-                {
-                    "error_code": "USERNAME_ALREADY_EXISTS",
-                    "detail": "Такое имя пользователя уже занято.",
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        if UserCloud.objects.filter(email=email).exists():
-            return Response(
-                {
-                    "error_code": "EMAIL_ALREADY_EXISTS",
-                    "detail": "Такой email уже занят.",
-                },
-                status=status.HTTP_400_BAD_REQUEST,
-            )
-
-        try:
-            user = UserCloud.objects.create_user(
-                username=username,
-                first_name=first_name,
-                email=email,
-                password=password,
-                is_staff=is_staff,
-            )
+        if serializer.is_valid():
+            user = serializer.save()
+            logger.info(f"Новый пользователь успешно зарегистрирован: {user.username}")
             return Response(
                 {"message": f"Пользователь {user.username} успешно зарегистрирован"},
                 status=status.HTTP_201_CREATED,
             )
-        except Exception as error:
-            return Response({"error": str(error)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            logger.error(
+                f"Ошибка регистрации пользователя. Детали: {serializer.errors}"
+            )
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

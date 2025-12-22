@@ -20,23 +20,19 @@ from django.urls import include, path, re_path
 from django.views.generic.base import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
 
 from rest_framework.routers import DefaultRouter
 from django.contrib.auth import views as auth_views  # noqa: F401
 
-from django.urls import (
-    path,  # noqa: F811
-    include,
-)
-
 from user.views.auth_views import (
-    user_login,
+    LoginView,
     RegistrationView,
     RegistrationUserValidateView,
 )
 from user.views.file_views import (
     FileViewSet,
-    download_file_link,
+    DownloadFileLinkView,
     FileRenameView,
     FileChangeCommentView,
 )
@@ -49,7 +45,7 @@ router.register("files", FileViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("login/", user_login, name="login"),
+    path("login/", LoginView.as_view(), name="login"),
     path("home/", HomeView.as_view(), name="home"),
     path("register/", RegistrationView.as_view(), name="register"),
     path(
@@ -61,7 +57,7 @@ urlpatterns = [
     path("user/<int:user_id>/", UserAdmin.as_view(), name="user_list"),
     path(
         "download/file/<uuid:short_hash>/<str:action>",
-        download_file_link,
+        DownloadFileLinkView.as_view(),
         name="download_file_link",
     ),
     path(
@@ -74,12 +70,19 @@ urlpatterns = [
         FileChangeCommentView.as_view(),
         name="update-comment",
     ),
-    # path("", include(router.urls)),
+    path("", include(router.urls)),
     # path("", include("user.urls")),
-    path("", TemplateView.as_view(template_name="index.html"), name="home"),
-    re_path(r"^.*$", TemplateView.as_view(template_name="index.html")),
+    # path("", TemplateView.as_view(template_name="index.html"), name="home"),
+    # re_path(r"^.*$", TemplateView.as_view(template_name="index.html")),
 ]
 
-print("-----------------\n\nurls settings.STATIC_URL\n\n------------------")
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    print("-----------------\n\nurls settings for local\n\n------------------")
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += [
+        re_path(
+            r"^favicon\.ico$",
+            lambda r: redirect(settings.STATIC_URL + "favicon.ico"),
+        ),
+    ]

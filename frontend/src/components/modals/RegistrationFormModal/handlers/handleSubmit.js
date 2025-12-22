@@ -2,12 +2,12 @@ import { notHiddenStoragePage, notHiddenUserAdminPage } from '../../../../redux/
 import { invisibleRegistrationForm } from '../../../../redux/slices/formSlice';
 import { fetchHomeStatic } from '../../../../fetch/fetchHomeStatic';
 import { fetchUserLogin } from '../../../../fetch/fetchUserLogin';
-import { fetchRegisterUser } from '../../../../fetch/fetchRegisterUser';
+import { fetchUserRegister } from '../../../../fetch/fetchUserRegister';
 
 
 export default async function handleSubmit(dispatch, values, isCheckedAdmin) {
   values.isStaff = isCheckedAdmin;
-  await dispatch(fetchRegisterUser(values))
+  await dispatch(fetchUserRegister(values))
     .unwrap()
     .then((message) => {
       dispatch(notHiddenStoragePage());
@@ -21,10 +21,8 @@ export default async function handleSubmit(dispatch, values, isCheckedAdmin) {
     })
     .catch((error) => {
       console.error('Ошибка при отправке файла:', error);
-      const { error_code, detail } = error;
-      if (error_code === 'USERNAME_ALREADY_EXISTS') {
-        alert(detail);
-      } else if (error_code === 'EMAIL_ALREADY_EXISTS') {
+      const { codeError, detail } = error;
+      if (codeError) {
         alert(detail);
       } else {
         alert('Произошла неизвестная ошибка.');

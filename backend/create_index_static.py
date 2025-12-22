@@ -1,4 +1,3 @@
-# create_index_static.py
 import os
 import sys
 import json

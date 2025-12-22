@@ -4,7 +4,7 @@ export default function handleCheckboxChangeAdmin(dispatch, isCheckedAdmin, setI
   let auchAdmin = prompt('введите пароль администратора');
   dispatch(fetchAuthAdmin({ auchAdmin: auchAdmin }))
     .then(payload => {
-      if (payload.payload === 'True') {
+      if (payload.payload === true) {
         setIsCheckedAdmin(!isCheckedAdmin);
       } else {
         alert('Неверный пароль Администратора')

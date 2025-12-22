@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchFileUser } from '../../fetch/fetchFileUser';
-// import { setUserId } from './actions';
 
 const initialState = {
   value: '',
@@ -22,8 +21,6 @@ const fileSlice = createSlice({
       state.error = null;
     },
     setUserId: (state, action) => {
-      console.log(action.payload, ' - action.payload');
-
       state.results.userId = action.payload;
     },
   },

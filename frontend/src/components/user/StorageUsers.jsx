@@ -21,8 +21,6 @@ export const StorageUsers = () => {
     dispatch(fetchUsers({ userId: file.userId, page: currentPage }));
   }, [dispatch, currentPage]);
 
-
-
   return (
     <>
       <h1>Список пользователей</h1>

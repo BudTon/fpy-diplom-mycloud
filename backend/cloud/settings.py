@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import logging.config
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -128,7 +129,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru-RU"
+
 
 TIME_ZONE = os.getenv("TIME_ZONE")
 USE_I18N = True
@@ -177,9 +179,9 @@ if DEBUG:
 
 else:
     CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
-    [
-        "http://ваш-домен.reg.ru",
-    ]
+    # [
+    #     "http://ваш-домен.reg.ru",
+    # ]
     CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
     print(CSRF_TRUSTED_ORIGINS, "- CSRF_TRUSTED_ORIGINS")
     print(CORS_ALLOWED_ORIGINS, "- CORS_ALLOWED_ORIGINS")
@@ -228,4 +230,45 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,  # задаёшь количество элементов на одной странице
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+        "file": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": os.path.join(BASE_DIR, "logs/server.log"),
+            "encoding": "utf-8",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console", "file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "user": {
+            "handlers": ["console", "file"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+    "root": {
+        "handlers": [],
+        "level": "NOTSET",
+    },
 }
