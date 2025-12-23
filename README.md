@@ -157,6 +157,12 @@ nano .env
 2 ALLOWED_HOSTS=ваш-домен.reg.ru,ip-адрес
 3 CORS_ALLOWED_ORIGINS=http://ваш-домен.reg.ru
 ```
+ _`примечание`_: _Пояснения о назначенни свойств_
+```bash
+MEDIA_ROOT = BASE_DIR / "storage" # папка для хранения загруженых файлов
+STATIC_ROOT = BASE_DIR / "static" # папка где собираютс все статические файлы командой python manage.py collectstatic
+```
+
 18.   Переходим в папку `frontend`:
 ```bash
 cd ../frontend
@@ -164,6 +170,12 @@ cd ../frontend
 19.   Pедактируем файл .env соответствии с шаблоном:
 ```bash
 nano .env
+```
+```
+VITE_BASE_URL=http://ваш-домен.reg.ru
+
+VITE_ITEMS_PER_PAGE=10
+
 ```
 20.Устанавливаем [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm):
 ```bash
@@ -190,56 +202,46 @@ npm install -g yarn
 ```bash
 yarn add vite
 ```
-26.  Создаем и заполняем файл .env
-```bash
-nano .env
-```
-```
-VITE_BASE_URL=http://ваш-домен.reg.ru
 
-VITE_ITEMS_PER_PAGE=10
-
-```
-
-27.  Производим сборку фронтенда:
+26.  Производим сборку фронтенда:
 ```bash
 yarn build
 ```
 Полученные файлы сразу переносятся в папку `backend` директорию `/frontend/dist/`
 
-28. Переходим в папку `backend`
+27. Переходим в папку `backend`
 ```bash
 cd ../backend
 ```
-29. Проверяем создание макетов моделий:
+28. Проверяем создание макетов моделий:
 ```bash
 python manage.py makemigrations user
 ```
-30. Применяем миграции:
+29. Применяем миграции:
 ```bash
 python manage.py migrate
 ```
-31. Создаём суперпользователя:
+30. Создаём суперпользователя:
 ```bash
 python manage.py create_superuser
 ```
-32. Добавляем шаблон {%static%} в файл index.html:
+31. Добавляем шаблон {%static%} в файл index.html:
 ```bash
 python create_index_static.py
 ```
-33. Собираем весь статичный контент в одну папку на сервере:
+32. Собираем весь статичный контент в одну папку на сервере:
 ```bash
 python manage.py collectstatic
 ```
-34. Запускаем сервер:
+33. Запускаем сервер:
 ```bash
 python manage.py runserver 0.0.0.0:8000
 ```
-35.  Проверяем работу `gunicorn`:
+34.  Проверяем работу `gunicorn`:
 ```bash
 gunicorn cloud.wsgi -b 0.0.0.0:8000
 ```
-36.  Создаём сокет `gunicorn.socket`:
+35.  Создаём сокет `gunicorn.socket`:
 ```bash
 sudo nano /etc/systemd/system/gunicorn.socket
 ```
@@ -255,7 +257,7 @@ sudo nano /etc/systemd/system/gunicorn.socket
       [Install]
       WantedBy=sockets.target
 ```
-37. Создаём сервис `gunicorn.service`:
+36. Создаём сервис `gunicorn.service`:
 ```bash
    sudo nano /etc/systemd/system/gunicorn.service
 ```
@@ -280,26 +282,26 @@ ExecStart=/home/<имя пользователя>/fpy-diplom-mycloud/backend/env
 [Install]
 WantedBy=multi-user.target
 ```
-38. Запускаем сокет `gunicorn.socket`:
+37. Запускаем сокет `gunicorn.socket`:
 ```bash
 sudo systemctl start gunicorn.socket
 ```
 ```bash
 sudo systemctl enable gunicorn.socket
 ```
-39. Проверяем его статус:
+38. Проверяем его статус:
 ```bash
 sudo systemctl status gunicorn.socket
 ```
-40. Убеждаемся, что файл `gunicorn.sock` присутствует в папке `/run`:
+39. Убеждаемся, что файл `gunicorn.sock` присутствует в папке `/run`:
 ```bash
 file /run/gunicorn.sock
 ```
-41. Проверяем статус `gunicorn`:
+40. Проверяем статус `gunicorn`:
 ```bash
 sudo systemctl status gunicorn
 ```
-42. Создаём модуль `nginx`:
+41. Создаём модуль `nginx`:
 ```bash
 sudo nano /etc/nginx/sites-available/backend
 ```
@@ -326,35 +328,35 @@ sudo nano /etc/nginx/sites-available/backend
 
       }
 ```
-44.  Активируем виртуальный хост, создаём символическую ссылку:
+42.  Активируем виртуальный хост, создаём символическую ссылку:
 ```bash
 sudo ln -s /etc/nginx/sites-available/backend /etc/nginx/sites-enabled
 ```
-45. Добавляем пользователя `www-data` в группу текущего пользователя:
+43. Добавляем пользователя `www-data` в группу текущего пользователя:
 ```bash
 sudo usermod -aG <имя пользователя> www-data
 ```
-46.   Диагностируем `nginx` на предмет ошибок в синтаксисе:
+44.   Диагностируем `nginx` на предмет ошибок в синтаксисе:
 ```bash
 sudo nginx -t
 ```
-47.   Перезапускаем веб-сервер:
+45.   Перезапускаем веб-сервер:
 ```bash
 sudo systemctl restart nginx
 ```
-48.   Проверяем статус `nginx`:
+46.   Проверяем статус `nginx`:
 ```bash
 sudo systemctl status nginx
 ```
-49.   При помощи `firewall` даём полные права `nginx` для подключений:
+47.   При помощи `firewall` даём полные права `nginx` для подключений:
 ```bash
 sudo ufw allow 'Nginx Full'
 ```
-50.  Проверяем доступ к сайту:
+48.  Проверяем доступ к сайту:
 ```bash
 http://<ip адрес сервера>
 ```
-51.   Проверяем доступ к административной панели:
+49.   Проверяем доступ к административной панели:
 ```bash
 http://<ip адрес сервера>/admin/
 ```

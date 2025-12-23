@@ -387,3 +387,33 @@ INFO 2025-12-22 21:14:08,837 basehttp "GET /home/ HTTP/1.1" 200 124
 INFO 2025-12-22 21:14:09,761 home_views Начало обработки запроса на просмотр статистики хранилища.
 INFO 2025-12-22 21:14:09,981 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
 INFO 2025-12-22 21:14:09,986 basehttp "GET /home/ HTTP/1.1" 200 124
+INFO 2025-12-23 02:04:59,777 autoreload Watching for file changes with StatReloader
+INFO 2025-12-23 02:05:32,931 basehttp "OPTIONS /home/ HTTP/1.1" 200 0
+INFO 2025-12-23 02:05:33,019 home_views Начало обработки запроса на просмотр статистики хранилища.
+INFO 2025-12-23 02:05:33,361 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
+INFO 2025-12-23 02:05:33,363 basehttp "GET /home/ HTTP/1.1" 200 124
+INFO 2025-12-23 02:05:42,170 basehttp "OPTIONS /login/ HTTP/1.1" 200 0
+INFO 2025-12-23 02:05:42,173 auth_views Начало попытки входа пользователя с логином: admin
+INFO 2025-12-23 02:05:44,073 auth_views Успешный вход пользователя: admin. Ответ: {'token': '1c9498c00a99102080569983cc990e748c12607d', 'status': 'ok', 'userId': 1, 'isStaff': True}
+INFO 2025-12-23 02:05:44,078 basehttp "POST /login/ HTTP/1.1" 200 92
+INFO 2025-12-23 02:05:44,088 basehttp "OPTIONS /storage/?user_id=1 HTTP/1.1" 200 0
+INFO 2025-12-23 02:05:44,115 basehttp "OPTIONS /storage/?page=1 HTTP/1.1" 200 0
+INFO 2025-12-23 02:05:44,526 storage_views Получена информация о хранении для пользователя admin. Всего страниц: 1.
+INFO 2025-12-23 02:05:44,527 storage_views Получена информация о хранении для пользователя admin. Всего страниц: 1.
+INFO 2025-12-23 02:05:44,529 basehttp "GET /storage/?user_id=1 HTTP/1.1" 200 2566
+INFO 2025-12-23 02:05:44,529 basehttp "GET /storage/?page=1 HTTP/1.1" 200 2566
+INFO 2025-12-23 02:05:44,548 basehttp "OPTIONS /storage/?user_id=1&page=1 HTTP/1.1" 200 0
+INFO 2025-12-23 02:05:44,666 storage_views Получена информация о хранении для пользователя admin. Всего страниц: 1.
+INFO 2025-12-23 02:05:44,669 basehttp "GET /storage/?user_id=1&page=1 HTTP/1.1" 200 2566
+INFO 2025-12-23 02:07:13,704 home_views Начало обработки запроса на просмотр статистики хранилища.
+INFO 2025-12-23 02:07:14,472 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
+INFO 2025-12-23 02:07:14,727 basehttp - Broken pipe from ('127.0.0.1', 64724)
+INFO 2025-12-23 02:07:14,970 home_views Начало обработки запроса на просмотр статистики хранилища.
+INFO 2025-12-23 02:07:15,333 home_views Количество пользователей: 11, Количество файлов: 22, Общий объем: 14210668 байт.
+INFO 2025-12-23 02:07:15,335 basehttp "GET /home/ HTTP/1.1" 200 124
+INFO 2025-12-23 02:07:25,455 basehttp "OPTIONS /register/ HTTP/1.1" 200 0
+ERROR 2025-12-23 02:07:25,624 auth_views Ошибка регистрации пользователя. Детали: {'username': [ErrorDetail(string='Пользователь с таким именем уже существует.', code='unique')], 'email': {'error_code': ErrorDetail(string='EMAIL_ALREADY_EXISTS', code='EMAIL_ALREADY_EXISTS'), 'detail': ErrorDetail(string='Такой email уже занят.', code='EMAIL_ALREADY_EXISTS')}, 'password': [ErrorDetail(string='Пароль должен содержать минимум 6 символов, одну заглавную букву, одну цифру и один специальный символ.', code='invalid')]}
+WARNING 2025-12-23 02:07:25,663 log Bad Request: /register/
+WARNING 2025-12-23 02:07:25,664 basehttp "POST /register/ HTTP/1.1" 400 394
+INFO 2025-12-23 02:09:00,377 autoreload D:\01_Netology\diplom_final\fpy-diplom-mycloud\backend\user\serializers.py changed, reloading.
+INFO 2025-12-23 02:09:05,201 autoreload Watching for file changes with StatReloader

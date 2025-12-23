@@ -113,11 +113,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return value
 
     def validate_password(self, value):
-        # Регулярное выражение для проверки пароля:
-        # - Минимум 6 символов
-        # - Одна заглавная буква
-        # - Одна цифра
-        # - Один специальный символ
         regex = r"^(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{6,}$"
 
         validator = RegexValidator(
